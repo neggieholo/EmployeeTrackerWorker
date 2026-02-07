@@ -1,0 +1,20 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.snametech.employeetrackerWorker" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <application android:requestLegacyExternalStorage="true" >
+7-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:3:5-9:19
+7-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:4:5-48
+8        <service
+8-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:5:9-8:40
+9            android:name="com.snametech.employeetrackerWorker.LocationService"
+9-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:6:13-44
+10            android:exported="false"
+10-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:8:13-37
+11            android:foregroundServiceType="location" />
+11-->C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:7:13-53
+12    </application>
+13
+14</manifest>

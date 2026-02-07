@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "848302077011",
+    "project_id": "employee-tracker-e67bb",
+    "storage_bucket": "employee-tracker-e67bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848302077011:android:bb30befd09df6e2eefc2a6",
+        "android_client_info": {
+          "package_name": "com.simonholo.EmployeeTracker_Worker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuoyp9VsmMqD7g687z9IF-BC6vHF8mWNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848302077011:android:e96670efa8dbb4d2efc2a6",
+        "android_client_info": {
+          "package_name": "com.simonholo.Employeetracker_manger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuoyp9VsmMqD7g687z9IF-BC6vHF8mWNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

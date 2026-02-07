@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["LocationModule"]
+  },
+  "android": {
+    "modules": ["com.snametech.employeetrackerWorker.LocationModule"]
+  }
+}
