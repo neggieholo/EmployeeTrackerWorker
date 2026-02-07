@@ -37,6 +37,7 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+google-services.json
 
 # generated native folders
 /ios
