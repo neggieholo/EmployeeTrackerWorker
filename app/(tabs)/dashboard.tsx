@@ -86,7 +86,7 @@ export default function Dashboard() {
 
     // 3. LISTEN for the updates coming from Kotlin
     const subscription = LocationModule.addLocationListener((data) => {
-      // console.log("Update received in UI:", data);
+      console.log("Update received in UI:", data);
       if (webViewRef.current) {
         const moveScript = `updateMap(${data.latitude}, ${data.longitude});`;
         webViewRef.current.injectJavaScript(moveScript);

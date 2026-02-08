@@ -12,6 +12,7 @@ import com.google.android.gms.location.*
 import android.location.Geocoder
 import android.os.Build
 import com.google.android.gms.location.FusedLocationProviderClient
+import fetchAddressFromAaPanel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,19 +82,37 @@ class LocationService : Service() {
                     serviceScope.launch {
                         try {
                             val geocoder = Geocoder(applicationContext, Locale.getDefault())
-                            
+
                             if (Build.VERSION.SDK_INT >= 33) {
                                 geocoder.getFromLocation(location.latitude, location.longitude, 1) { addresses ->
-                                    lastAddress = if (addresses.isNotEmpty()) addresses[0].getAddressLine(0) else "Address not found"
-                                    LocationStore.update(location.latitude, location.longitude, lastAddress)
+                                    if (!addresses.isNullOrEmpty()) {
+                                        lastAddress = addresses[0].getAddressLine(0)
+                                        LocationStore.update(location.latitude, location.longitude, lastAddress)
+                                    } else {
+                                        // Launch a new coroutine for the network fallback
+                                        serviceScope.launch {
+                                            lastAddress = fetchAddressFromAaPanel(location.latitude, location.longitude)
+                                            LocationStore.update(location.latitude, location.longitude, lastAddress)
+                                        }
+                                    }
                                 }
                             } else {
                                 val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                                lastAddress = if (!addresses.isNullOrEmpty()) addresses[0].getAddressLine(0) else "Address not found"
+                                if (!addresses.isNullOrEmpty()) {
+                                    lastAddress = addresses[0].getAddressLine(0)
+                                } else {
+                                    // Synchronous-style call for older SDKs
+                                    lastAddress = fetchAddressFromAaPanel(location.latitude, location.longitude)
+                                }
                                 LocationStore.update(location.latitude, location.longitude, lastAddress)
                             }
                         } catch (e: Exception) {
                             Log.e("LocationService", "Geocoder error: ${e.message}")
+                            // Final fallback on crash
+                            serviceScope.launch {
+                                lastAddress = fetchAddressFromAaPanel(location.latitude, location.longitude)
+                                LocationStore.update(location.latitude, location.longitude, lastAddress)
+                            }
                         }
                     }
                 } else {

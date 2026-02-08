@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 data class GeoResponse(
     @SerializedName("display_name")
-    val displayName: String
+    val display_name: String?
 )
 
 interface LocationApiService {

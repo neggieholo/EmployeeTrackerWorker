@@ -32,7 +32,7 @@ export function isBatteryOptimizationIgnored(): Promise<boolean> {
 
 // 4. Use the module itself to add the listener
 export function addLocationListener(
-  listener: (event: { latitude: number; longitude: number; address: string }) => void
+  listener: (event: { latitude: number; longitude: number; address: string; timestamp: number }) => void
 ): EventSubscription {
   // In SDK 52, we call addListener directly on the module
   return LocationTrackingModule.addListener('onLocationUpdate', listener);

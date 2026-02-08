@@ -33,8 +33,6 @@
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_LOCATION",
         "REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_EXTERNAL_STORAGE",
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "ACCESS_BACKGROUND_LOCATION",
@@ -50,9 +48,7 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_LOCATION",
-        "REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_EXTERNAL_STORAGE"
+        "REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
       ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -97,6 +93,12 @@
         "projectId": "897d2893-cfeb-4ee5-a0b7-860e2e67528b"
       }
     },
-    "owner": "simonholo"
+    "owner": "simonholo",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/897d2893-cfeb-4ee5-a0b7-860e2e67528b"
+    }
   }
 }

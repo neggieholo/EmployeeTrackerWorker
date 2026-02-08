@@ -39,6 +39,7 @@ export type LocationState = {
   latitude: number;
   longitude: number;
   address?: string | null;
+  timestamp: number;
 };
 
 export interface MonitoringContextType {

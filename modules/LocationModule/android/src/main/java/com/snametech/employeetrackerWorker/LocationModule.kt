@@ -55,7 +55,8 @@ class LocationModule : Module() {
                             mapOf(
                                 "latitude" to state.latitude,
                                 "longitude" to state.longitude,
-                                "address" to (state.address ?: "Searching...")
+                                "address" to (state.address ?: "Searching..."),
+                                "timestamp" to state.timestamp
                             )
                         )
                     }

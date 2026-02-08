@@ -74,7 +74,7 @@ export default function MonitoringProvider({
 
     newSocket.on("connect", () => {
       setIsConnected(true);
-      console.log("✅ Manager Connected via Session ID");
+      console.log("✅ Worker Connected via Session ID");
     });
 
     newSocket.on("onlineCheck", (users: CleanSocketUser[]) => {
@@ -105,7 +105,7 @@ export default function MonitoringProvider({
 
     newSocket.on("disconnect", async (reason) => {
       setIsConnected(false);
-      console.log("❌ Manager Disconnected");
+      console.log("❌ Worker Disconnected");
       if (
         reason === "io server disconnect" ||
         reason === "io client disconnect"
@@ -136,18 +136,18 @@ export default function MonitoringProvider({
   }, [sessionId, pushToken, router]);
 
   const sendLocation = (location: LocationState) => {
-  if (socketRef.current && socketRef.current.connected) {
-    const timestamp = new Date().toISOString();
-    
-    socketRef.current.emit("user_location", {
-      latitude: location.latitude,
-      longitude: location.longitude,
-      address: location.address,
-      timestamp,
-    });
-    console.log(`📍 Location sent: ${location.latitude}, ${location.longitude}`);
-  }
-};
+    if (socketRef.current && socketRef.current.connected) {
+      socketRef.current.emit("user_location", {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        address: location.address,
+        timestamp:location.timestamp,
+      });
+      console.log(
+        `📍 Location sent: ${location.latitude}, ${location.longitude}`,
+      );
+    }
+  };
 
   const emitClockingStatus = (message: string) => {
     if (socketRef.current && socketRef.current.connected) {
