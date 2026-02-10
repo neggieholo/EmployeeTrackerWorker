@@ -1,7 +1,7 @@
 import { CleanClockEvent } from "../Types/Employee";
 import { SearchClockResponse } from "../Types/Socket";
 
-const BASE_URL = "http://10.35.61.113:3060/api";
+const BASE_URL = "http://192.168.8.193:3060/api";
 
 export default async function postLogin(email: string, password: string) {
   try {
@@ -245,14 +245,15 @@ export const fetchClockButtonStatus = async (): Promise<{
     });
 
     const data = await response.json();
+    console.log("Last clock event data:", data);
 
-    // If no data exists, allow Clock In
-    if (!data || !data.type || !data.timestamp) {
+    // 1. Basic check: If success is false or data is missing
+    if (!data || !data.timestamp || !data.type) {
       return { text: "Clock In", enable: true };
     }
 
-    // Convert timestamp (handling the _seconds format from your Flutter logic)
-    const lastDate = new Date(data.timestamp._seconds * 1000);
+    // 2. FIXED DATE PARSING: Handle the ISO string directly
+    const lastDate = new Date(data.timestamp); 
     const today = new Date();
 
     const isSameDay =
@@ -260,17 +261,21 @@ export const fetchClockButtonStatus = async (): Promise<{
       lastDate.getMonth() === today.getMonth() &&
       lastDate.getDate() === today.getDate();
 
-    // Flutter Logic Ported:
-    if (data.type === "clock_in" && isSameDay) {
+    console.log(`Checking Day: LastEvent(${lastDate.toDateString()}) vs Today(${today.toDateString()}) - Match: ${isSameDay}`);
+
+    // 3. Logic based on state
+    if (data.type === "clocked in" && isSameDay) {
+      console.log("Data.type:", data.type);
       return { text: "Clock Out", enable: true };
-    } else if (data.type === "clock_out" && isSameDay) {
-      return { text: "Clock Out (Completed)", enable: false };
+    } else if (data.type === "clocked out" && isSameDay) {
+      return { text: "Clocked Out (Completed)", enable: false };
     } else {
+      // It's a new day or no activity yet
       return { text: "Clock In", enable: true };
     }
   } catch (error) {
     console.error("❌ Error fetching last clock event:", error);
-    return { text: "Clock In", enable: false };
+    return { text: "Clock In", enable: false }; // Disable to prevent double-clocks on error
   }
 };
 

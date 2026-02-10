@@ -7,13 +7,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Alert } from "react-native";
 import { io, Socket } from "socket.io-client";
-import { fetchTodayClock, postLogout } from "./services/api";
-import { CleanClockEvent } from "./Types/Employee";
+import { postLogout } from "./services/api";
 import {
-  CleanNotification,
-  CleanSocketUser,
   MonitoringContextType,
   LocationState
 } from "./Types/Socket";
@@ -37,13 +33,13 @@ export default function MonitoringProvider({
   const [pushToken, setPushToken] = useState<string | null>(null);
 
   // Data States
-  const [onlineMembers, setOnlineMembers] = useState<CleanSocketUser[]>([]);
-  const [notifications, setNotifications] = useState<CleanNotification[]>([]);
-  const [clockEvents, setClockEvents] = useState<{
-    in: CleanClockEvent[];
-    out: CleanClockEvent[];
-  }>({ in: [], out: [] });
-  const badgeCount = notifications.length;
+  // const [onlineMembers, setOnlineMembers] = useState<CleanSocketUser[]>([]);
+  // const [notifications, setNotifications] = useState<CleanNotification[]>([]);
+  // const [clockEvents, setClockEvents] = useState<{
+  //   in: CleanClockEvent[];
+  //   out: CleanClockEvent[];
+  // }>({ in: [], out: [] });
+  // const badgeCount = notifications.length;
 
   const disconnectSocket = () => {
     if (socketRef.current) {
@@ -63,7 +59,7 @@ export default function MonitoringProvider({
       return;
     }
 
-    const newSocket = io("http://10.35.61.113:3060", {
+    const newSocket = io("http://192.168.8.193:3060", {
       path: "/api/socket.io", // 👈 MUST match the server path exactly
       transports: ["websocket"],
       autoConnect: true,
@@ -77,31 +73,26 @@ export default function MonitoringProvider({
       console.log("✅ Worker Connected via Session ID");
     });
 
-    newSocket.on("onlineCheck", (users: CleanSocketUser[]) => {
-      console.log("Online members update:", users);
-      setOnlineMembers(users);
-    });
+    // newSocket.on(
+    //   "messages",
+    //   (data: CleanNotification | CleanNotification[]) => {
+    //     setNotifications((prev) => {
+    //       const incoming = Array.isArray(data) ? data : [data];
 
-    newSocket.on(
-      "messages",
-      (data: CleanNotification | CleanNotification[]) => {
-        setNotifications((prev) => {
-          const incoming = Array.isArray(data) ? data : [data];
+    //       // Combine and remove duplicates based on the _id from your logs
+    //       const combined = [...incoming, ...prev];
+    //       return combined.filter(
+    //         (v, i, a) => a.findIndex((t) => t._id === v._id) === i,
+    //       );
+    //     });
+    //   },
+    // );
 
-          // Combine and remove duplicates based on the _id from your logs
-          const combined = [...incoming, ...prev];
-          return combined.filter(
-            (v, i, a) => a.findIndex((t) => t._id === v._id) === i,
-          );
-        });
-      },
-    );
+    // newSocket.on("notification_deleted", (id: string) => {
+    //   setNotifications((prev) => prev.filter((n) => n._id !== id));
+    // });
 
-    newSocket.on("notification_deleted", (id: string) => {
-      setNotifications((prev) => prev.filter((n) => n._id !== id));
-    });
-
-    newSocket.on("all_notifications_deleted", () => setNotifications([]));
+    // newSocket.on("all_notifications_deleted", () => setNotifications([]));
 
     newSocket.on("disconnect", async (reason) => {
       setIsConnected(false);
@@ -143,9 +134,9 @@ export default function MonitoringProvider({
         address: location.address,
         timestamp:location.timestamp,
       });
-      console.log(
-        `📍 Location sent: ${location.latitude}, ${location.longitude}`,
-      );
+      // console.log(
+      //   `📍 Location sent: ${location.latitude}, ${location.longitude}`,
+      // );
     }
   };
 
@@ -170,10 +161,6 @@ export default function MonitoringProvider({
   return (
     <MonitoringContext.Provider
       value={{
-        onlineMembers,
-        clockEvents,
-        notifications,
-        badgeCount,
         isConnected,
         userName,
         setUserName,

@@ -43,10 +43,6 @@ export type LocationState = {
 };
 
 export interface MonitoringContextType {
-  onlineMembers: CleanSocketUser[];
-  notifications: CleanNotification[];
-  clockEvents: { in: CleanClockEvent[]; out: CleanClockEvent[] };
-  badgeCount: number;
   isConnected: boolean;
   userName: string | null;
   setUserName: (name: string | null) => void;
