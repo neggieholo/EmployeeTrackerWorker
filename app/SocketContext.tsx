@@ -59,7 +59,7 @@ export default function MonitoringProvider({
       return;
     }
 
-    const newSocket = io("http://192.168.8.193:3060", {
+    const newSocket = io("http://10.21.77.113:3060", {
       path: "/api/socket.io", // 👈 MUST match the server path exactly
       transports: ["websocket"],
       autoConnect: true,

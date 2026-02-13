@@ -58,7 +58,7 @@ export default function RootLayout() {
         </Text>
         <TouchableOpacity
           onPress={checkLocationStatus}
-          className="bg-[#36AA8F] w-full py-4 rounded-xl items-center"
+          className="bg-[#1A73E8] w-full py-4 rounded-xl items-center"
         >
           <Text className="text-white font-bold text-lg">Check Again</Text>
         </TouchableOpacity>
