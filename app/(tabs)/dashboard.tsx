@@ -153,13 +153,18 @@ const handleClockAction = async () => {
         <script>
           var map, marker;
 
-          // Initialize Map immediately
-          map = L.map('map', { 
-            zoomControl: false,
-            attributionControl: false 
-          }).setView([0, 0], 2);
+          map = L.map('map', { zoomControl: true, attributionControl: false }).setView([6.5, 3.3], 12);
+          L.tileLayer('https://tiles.snametechapp.com/styles/basic-preview/{z}/{x}/{y}.png', {
+              maxZoom: 18,
+              minZoom: 0,
+              keepBuffer: 4,
+              updateWhenIdle: false,
+              updateInterval: 100
+          }).addTo(map);
 
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+          setTimeout(function() {
+            map.invalidateSize();
+          }, 500);
 
           // Function called from React Native
           function updateMap(lat, lon) {
@@ -247,10 +252,11 @@ const handleClockAction = async () => {
         <WebView
           ref={webViewRef}
           originWhitelist={["*"]}
-          scrollEnabled={false}
-          className="flex-1"
-          // Use location to set the INITIAL state, but don't bind the
-          // whole HTML string to the location state to avoid re-renders.
+          javaScriptEnabled={true}
+          mixedContentMode="always"
+          androidLayerType="hardware"
+          domStorageEnabled={true}
+          userAgent="Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
           source={{ html: mapHtml }}
           onLoadEnd={() => {
             if (location) {

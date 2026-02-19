@@ -1,7 +1,7 @@
 import { CleanClockEvent } from "../Types/Employee";
 import { SearchClockResponse } from "../Types/Socket";
 
-const BASE_URL = "http://10.21.77.113:3060/api";
+const BASE_URL = "https://www.employeetracker.app/api";
 
 export default async function postLogin(email: string, password: string) {
   try {
