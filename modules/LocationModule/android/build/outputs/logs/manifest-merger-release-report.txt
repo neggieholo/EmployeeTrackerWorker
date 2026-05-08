@@ -1,0 +1,29 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:1:1-10:12
+	package
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:2:5-50
+		INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:3:5-9:19
+	android:requestLegacyExternalStorage
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:4:5-48
+service#com.snametech.employeetrackerWorker.LocationService
+ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:5:9-8:40
+	android:exported
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:8:13-37
+	android:foregroundServiceType
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:7:13-53
+	android:name
+		ADDED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml:6:13-44
+uses-sdk
+INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml
+INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\EmployeeTrackerWorker\modules\LocationModule\android\src\main\AndroidManifest.xml
